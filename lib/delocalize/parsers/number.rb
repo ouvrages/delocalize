@@ -10,7 +10,7 @@ module Delocalize
         separator, delimiter = I18n.t([:separator, :delimiter], :scope => :'number.format')
         result = value.gsub(delimiter, '').gsub(separator, '.')
 
-        if (other_separators = I18n.t(:delocalize_delimiters, :scope => :'number.format', default: '')).present?
+        unless (other_separators = I18n.t(:delocalize_delimiters, :scope => :'number.format', default: '')).empty?
           result = result.gsub(/[#{Regexp.escape(other_separators)}]/, '')
         end
 
